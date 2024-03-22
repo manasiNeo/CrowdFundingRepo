@@ -23,7 +23,7 @@ public class DeleteCampaign {
             }
         }
     
-        // If the user has no campaigns, display appropriate message
+       
         if (!hasCampaigns) {
             System.out.println("You have no campaigns left to delete.");
             return;
@@ -34,7 +34,7 @@ public class DeleteCampaign {
         int campaignId = scanner.nextInt();
         scanner.nextLine(); // Consume newline character
     
-        // Check if the selected campaign exists and belongs to the logged-in user
+       
         String checkOwnershipQuery = "SELECT * FROM campaign WHERE campaignId = ? AND userId = ?";
         try (PreparedStatement checkStatement = connection.prepareStatement(checkOwnershipQuery)) {
             checkStatement.setInt(1, campaignId);
