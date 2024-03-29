@@ -1,36 +1,5 @@
-<<<<<<< HEAD
-package com.crowd.funding.Model;
+package com.crowd.funding;
 
-public class User {
-
-    private int userId;
-    private String name;
-    private String contactNumber;
-
-    
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-    
-    public String getName() {
-        return name;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
-    
-    public String getContactNumber() {
-        return contactNumber;
-    }
-    public void setContactNumber(String contactNumber) {
-        this.contactNumber = contactNumber;
-    }
-
-=======
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -43,12 +12,10 @@ public class user {
     public static int login(Connection connection) throws SQLException {
         System.out.print("Enter UserID: ");
         int userId = scanner.nextInt();
-        scanner.nextLine(); // Consume newline character
-
+        scanner.nextLine(); 
         System.out.print("Enter Password: ");
         String password = scanner.nextLine();
 
-        // Check if user exists with given credentials
         String query = "SELECT * FROM users WHERE userId = ? AND password = ?";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setInt(1, userId);
@@ -56,10 +23,10 @@ public class user {
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
                     System.out.println("Login successful.");
-                    return userId; // Return logged-in user ID
+                    return userId; 
                 } else {
-                    System.out.println("Invalid UserID or Password.");
-                    return -1; // Return -1 if login fails
+                    System.out.println("Please sign up first");
+                    return -1; 
                 }
             }
         }
@@ -96,5 +63,4 @@ public class user {
         }
         
     }
->>>>>>> 5d45a5af6fa26c1564370ef2499d56ed75bf26f8
 }
