@@ -10,7 +10,9 @@ import java.util.Scanner;
 public class DonateToCampaign {
     private static final Scanner scanner = new Scanner(System.in);
 
-    public static void donateToCampaign(Connection connection, int userId) throws SQLException {
+    public static void donateToCampaign(Connection connection, int userId) throws SQLException
+    {
+        //firstly show what campaigns are present to choose from
         Statement emptyStatement = connection.createStatement();
         boolean isEmpty = true;
         try (emptyStatement) {
@@ -29,9 +31,11 @@ public class DonateToCampaign {
         }
 
         System.out.println("See the campaigns going on");
-        try (Statement statement = connection.createStatement()) {
+        try (Statement statement = connection.createStatement()) 
+        {
             String query = "SELECT campaignId, title, description, target_amount, end_date, current_amount_raised, status FROM campaign";
-            try (ResultSet resultSet = statement.executeQuery(query)) {
+            try (ResultSet resultSet = statement.executeQuery(query)) 
+            {
 
                 System.out.printf("%-10s %-20s %-40s %-10s %-10s %-10s %-10s%n",
                                 "CampaignID", "Title", "Description", "Target Amount", "End Date",
@@ -46,9 +50,7 @@ public class DonateToCampaign {
                     double currentAmountRaised = resultSet.getDouble("current_amount_raised");
                     String status = resultSet.getString("status");
 
-                    System.out.printf("%-10d %-20s %-40s %-10s %-10s %-10s %-10s%n",
-                                    campaignId, title, description, targetAmount, endDate,
-                                    currentAmountRaised, status);
+                    System.out.printf("%-10d %-20s %-40s %-10s %-10s %-10s %-10s%n", campaignId, title, description, targetAmount, endDate, currentAmountRaised, status);
                 }
             }
         }
@@ -63,11 +65,12 @@ public class DonateToCampaign {
             ResultSet statusResultSet = statusStatement.executeQuery();
             if (statusResultSet.next()) {
                 String status = statusResultSet.getString("status");
-                if (status.equals("active")) {
+                if (status.equalsIgnoreCase("active")) {
                     System.out.print("Enter Donation Amount: ");
                     double donationAmount = scanner.nextDouble();
                     String updateCampaignQuery = "UPDATE campaign SET current_amount_raised = current_amount_raised + ? WHERE campaignId = ?";
-                    try (PreparedStatement campaignStatement = connection.prepareStatement(updateCampaignQuery)) {
+                    try (PreparedStatement campaignStatement = connection.prepareStatement(updateCampaignQuery)) 
+                    {
                         campaignStatement.setDouble(1, donationAmount);
                         campaignStatement.setInt(2, campaignId);
                         int rowsAffected = campaignStatement.executeUpdate();

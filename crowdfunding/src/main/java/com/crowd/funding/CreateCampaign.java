@@ -9,6 +9,8 @@ public class CreateCampaign {
     private static final Scanner scanner = new Scanner(System.in);
 
     public static void createCampaign(Connection connection, int userId) throws SQLException {
+        System.out.println();
+        System.out.println("                      You are creating the campaign    ");
         System.out.println("Enter campaign details:");
         System.out.print("Title: ");
         String title = scanner.nextLine();
@@ -29,9 +31,11 @@ public class CreateCampaign {
             statement.setInt(5, userId); 
             int rowsAffected = statement.executeUpdate();
             if (rowsAffected > 0) {
-                System.out.println("Campaign created successfully.");
+                System.out.println();
+                System.out.println("                     Campaign created successfully.");
             } else {
-                System.out.println("Failed to create campaign.");
+                System.out.println();
+                System.out.println("                     Failed to create campaign.");
             }
         }
         

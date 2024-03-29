@@ -7,7 +7,6 @@ import java.util.Scanner;
 
 public class Main {
 
-    // Database connection parameters
     private static final String url = "jdbc:mysql://localhost:3306/milap";
     private static final String username = "root";
     private static final String password = "examly";
@@ -18,28 +17,33 @@ public class Main {
         
         Connection connection = DriverManager.getConnection(url, username, password);
         try(connection){
-            System.out.println("Welcome to CrowdFunding!!!");
+            System.out.println("         Welcome to CrowdFunding page !!!         ");
+            System.out.println();
 
             boolean isLoggedIn = false;
             int userId = -1; 
             while (true) {
                 if (isLoggedIn) {
                     System.out.println();
-                    System.out.println("Make a choice");
+                    System.out.println("Selete from below options");
                     System.out.println("Enter 3 to create Campaign");
                     System.out.println("Enter 4 to donate to Campaign");
                     System.out.println("Enter 5 to delete a Campaign");
-                    System.out.println("Enter 6 to view all the Campaigns going on");
+                    System.out.println("Enter 6 to viewing all the Campaigns going on");
                     System.out.println("Enter 7 to view user details");
                     System.out.println("Enter 8 to Logout");
                 } else {
+                    System.out.println();
                     System.out.println("Choose an option:");
                     System.out.println("Enter 1 to login");
                     System.out.println("Enter 2 for signup");
-                    System.out.println("Enter 0 for exiting");
+                    System.out.println("Enter 6 for viewing present campaign details");
+                    System.out.println("Enter 8 for exiting the page");
                 }
+
                 System.out.println();
                 System.out.print("Enter your choice: ");
+                System.out.println();
                 int choice = scanner.nextInt();
                 scanner.nextLine(); 
 
@@ -50,7 +54,7 @@ public class Main {
                         break;
                     case 2:
                         user.signup(connection);
-                        break;
+                        break; 
                     case 3:
                         if (isLoggedIn) 
                             CreateCampaign.createCampaign(connection, userId);
@@ -74,12 +78,7 @@ public class Main {
                         ViewCampaign.viewCampaigns(connection);
                         break;
                     case 7:
-                        if (isLoggedIn) 
-                            UserDetails.displayUsers(connection);
-                        else{
-                            System.out.println();
-                            System.out.println("Please login");
-                        }
+                        UserDetails.displayUsers(connection);
                         break;
                     case 8:
                         System.out.println();

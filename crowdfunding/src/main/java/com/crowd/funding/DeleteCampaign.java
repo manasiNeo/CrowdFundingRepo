@@ -10,7 +10,8 @@ public class DeleteCampaign {
     private static final Scanner scanner = new Scanner(System.in);
 
     public static void deleteCampaign(Connection connection, int userId) throws SQLException {
-        System.out.println("Your Campaigns:");
+        System.out.println("Campaigns going on!!!");
+        System.out.println();
         String selectQuery = "SELECT campaignId, title FROM campaign WHERE userId = ?";
         boolean hasCampaigns = false;
         try (PreparedStatement selectStatement = connection.prepareStatement(selectQuery)) {

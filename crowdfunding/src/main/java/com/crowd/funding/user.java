@@ -22,7 +22,8 @@ public class user {
             statement.setString(2, password);
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
-                    System.out.println("Login successful.");
+                    System.out.println();
+                    System.out.println("          Login successful          ");
                     return userId; 
                 } else {
                     System.out.println("Please sign up first");
@@ -36,7 +37,7 @@ public class user {
     public static void signup(Connection connection) throws SQLException {
         System.out.print("Enter UserID: ");
         int userId = scanner.nextInt();
-        scanner.nextLine(); // Consume newline character
+        scanner.nextLine(); 
     
         System.out.print("Enter Name: ");
         String name = scanner.nextLine();
@@ -46,8 +47,7 @@ public class user {
     
         System.out.print("Enter Contact Number: ");
         String contactNumber = scanner.nextLine();
-    
-        //Insert user details into the database
+  
         String insertQuery = "INSERT INTO users (userId, name, password, contact_number) VALUES (?, ?, ?, ?)";
         try (PreparedStatement statement = connection.prepareStatement(insertQuery)) {
             statement.setInt(1, userId);
@@ -56,7 +56,7 @@ public class user {
             statement.setString(4, contactNumber);
             int rowsAffected = statement.executeUpdate();
             if (rowsAffected > 0) {
-                System.out.println("User signed up successfully.");
+                System.out.println("          User signed up successfully");
             } else {
                 System.out.println("Failed to sign up user.");
             }

@@ -16,9 +16,7 @@ public class ViewCampaign {
                     return;
                 }
 
-                System.out.printf("%-10s %-20s %-25s %-15s %-15s %-10s %-10s%n",
-                                  "CampaignID", "Title", "Description", "Target Amount", "End Date",
-                                  "Current Amount Raised", "Status");
+                System.out.printf("%-10s %-20s %-25s %-15s %-15s %-25s %-10s%n", "CampaignID", "Title", "Description", "Target Amount", "End Date", "Current Amount Raised", "Status");
                 
                 do {
                     int campaignId = resultSet.getInt("campaignId");
@@ -29,10 +27,9 @@ public class ViewCampaign {
                     double currentAmountRaised = resultSet.getDouble("current_amount_raised");
                     String status = resultSet.getString("status");
     
-                    System.out.printf("%-10d %-20s %-25s %-15s %-15s %-20s %-10s%n",
-                                      campaignId, title, shortDescription, targetAmount, endDate,
-                                      currentAmountRaised, status);
+                    System.out.printf("%-10d %-20s %-25s %-20s %-20s %-25s %-10s%n",campaignId, title, shortDescription, targetAmount, endDate, currentAmountRaised, status);
                 } while (resultSet.next());
+                
             }catch(Exception e){}
             
         }catch (Exception e){}
